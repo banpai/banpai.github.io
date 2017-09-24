@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>独酌雅居 | 半拍的博客</title>
+  <meta name="author" content="半拍">
+  
+  <meta name="description" content="学习总结 思考感悟 知识管理">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="独酌雅居"/>
+  <meta property="og:site_name" content="半拍的博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="半拍的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">半拍的博客</a></h1>
+  <h2><a href="/">凡走过，必留下痕迹，学点什么都会有用的</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-09-24T00:28:34.917Z"><a href="/2017/09/24/零基础vue-1/">2017-09-24</a></time>
+      
+      
+  
+    <h1 class="title">独酌雅居</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>“独酌雅居”是我为自己这个项目命的名字，是用electron + vue + lowdb做的一款具有离线功能的，PC段的桌面应用。</p>
+<a id="more"></a>
+<h2 id="项目由来"><a href="#项目由来" class="headerlink" title="项目由来"></a>项目由来</h2><p>为什么要做这样一个东西出来呢？其实是我在日常的项目开发中自己所遇到的一个痛点，我不知道别的程序员有没有，可能是我的层次太低了，所以我会产生这样的需求。</p>
+<p>在我的工作中经常会发生这样的事情，有些代码片段是不需要我们去记忆的，用到的时候记得拿过来用就行了，但是经常性的，我们会很辛苦的去别的项目里找代码，拷贝代码，这样的过程给我带来了很大的不方便，所以我就想做一个这样的应用来存储工作中可能经常要用到，但是不需要记忆，有的时候找起来又比较麻烦的代码，将这些代码统一的放到一个应用里管理，岂不是很方便。</p>
+<p>第二个我在写程序的时候所遇到的痛点就是项目文件夹的管理了，有的时候项目一多，找起来就比较麻烦，虽然用快捷键放到桌面上还是比较方便的，但是我想放到一个专门的应用里管理，清晰明了的展现出一个个项目，一个个分类，应该是一件很方便的事情。</p>
+<p>基于以上我在实际的工作中所遇到的痛点，所以我想到了自己做出一款这样的应用来，顺便也挑战一下自己，锻炼一下自己的能力。</p>
+<h2 id="为什么选择Electron-vue-lowdb"><a href="#为什么选择Electron-vue-lowdb" class="headerlink" title="为什么选择Electron + vue + lowdb"></a>为什么选择Electron + vue + lowdb</h2><p>其实类似这样可以将前端页面，打包成桌面应用的工具还有一个选择，那就是NW，不过我选择了Electron，其实也没别的什么原因，只是我先接触的是electron，正好vscode也是用electron打造的，我挺喜欢vscode这款编辑器的，想来electron也不会太差。</p>
+<h3 id="什么是Electron"><a href="#什么是Electron" class="headerlink" title="什么是Electron"></a>什么是Electron</h3><p>Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造桌面应用。你可以把它看作是专注于桌面应用而不是 web 服务器的，io.js 的一个变体。</p>
+<p>这不意味着 Electron 是绑定了 GUI 库的 JavaScript。相反，Electron 使用 web 页面作为它的 GUI，所以你能把它看作成一个被 JavaScript 控制的，精简版的 Chromium 浏览器。</p>
+<p>以下资料供参考学习：</p>
+<p><a href="https://zh.wikipedia.org/wiki/Electron_(%E8%BD%AF%E4%BB%B6%E6%A1%86%E6%9E%B6" target="_blank" rel="external">Electron(维基百科)</a>)</p>
+<p><a href="https://www.w3cschool.cn/electronmanual/" target="_blank" rel="external">中文文档</a></p>
+<p><a href="https://segmentfault.com/a/1190000007503495" target="_blank" rel="external">(译)Electron的本质</a></p>
+<p><a href="http://ourcodeworld.com/articles/read/106/how-to-choose-read-save-delete-or-create-a-file-with-electron-framework" target="_blank" rel="external">入门视频教程</a></p>
+<p>选择vue的理由其实很简单，因为vue本身不难，官网的api和一些入门的知识都挺全的，react给我的感觉学习曲线会更陡，没办法，我就是这么怂，肯定挑更加简单一点的。</p>
+<p>lowdb是可以在本地运行的，非常轻量级的数据管理工具，相当于一个数据库了，只是很轻，非常非常轻，之前我一直在线上的数据库和离线的本地数据库之间犹豫不决，最终我还是选择了本地的数据处理方法，就让应用离线运行吧，毕竟我这个穷屌丝还没钱买服务器。</p>
+<h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><ul>
+<li style="list-style: none"><input type="checkbox" checked> Vue</li>
+<li style="list-style: none"><input type="checkbox" checked> VueRouter</li>
+<li style="list-style: none"><input type="checkbox" checked> Vuex</li>
+<li style="list-style: none"><input type="checkbox" checked> Vue-Electron</li>
+<li style="list-style: none"><input type="checkbox" checked> iView</li>
+<li style="list-style: none"><input type="checkbox" checked> Eslint</li>
+<li style="list-style: none"><input type="checkbox" checked> Babel</li>
+<li style="list-style: none"><input type="checkbox" checked> Webpack</li>
+<li style="list-style: none"><input type="checkbox" checked> Less</li>
+</ul>
+<p>项目采用了vue-cli脚手架搭建开发环境，在开始编码之前，在gayhub上搜了一下，发现有大神写了一个基于vue和electron的脚手架，看了文档后，发现正好适合我的需要，瞬间发现了新大陆。</p>
+<p>项目名称：<code>electron-vue</code></p>
+<p>项目地址：<a href="https://github.com/SimulatedGREG/electron-vue" target="_blank" rel="external">https://github.com/SimulatedGREG/electron-vue</a></p>
+<p>项目文档(英文的)：<a href="https://simulatedgreg.gitbooks.io/electron-vue/content/en/" target="_blank" rel="external">https://simulatedgreg.gitbooks.io/electron-vue/content/en/</a></p>
+<h3 id="工程目录"><a href="#工程目录" class="headerlink" title="工程目录"></a>工程目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">│</div><div class="line">├── README.md                           &lt;=  项目介绍</div><div class="line">├── app                                 &lt;=  开发目录</div><div class="line">│   ├── dist                            &lt;= 编译打包</div><div class="line">│   ├── icons                           &lt;= 相关图标</div><div class="line">│   ├── src                             &lt;= 项目源代码</div><div class="line">│   │   ├── main                        &lt;= electron主进程</div><div class="line">│   │   │   ├── application.js</div><div class="line">│   │   │   ├── index.dev.js</div><div class="line">│   │   │   ├── index.js</div><div class="line">│   │   ├── renderer                    &lt;= electron渲染进程</div><div class="line">│   │   │   ├── App.vue                 &lt;=  Vue 根组件</div><div class="line">│   │   │   ├── main.js                 &lt;=  Vue 入口</div><div class="line">│   │   │   ├── assets                  &lt;=  静态资源</div><div class="line">│   │   │   ├── common                  &lt;=  公共配置</div><div class="line">│   │   │   ├── config                  &lt;=  项目配置</div><div class="line">│   │   │   ├── extend                  &lt;=  Vue 扩展相关</div><div class="line">│   │   │   ├── router                  &lt;=  Vue 路由相关</div><div class="line">│   │   │   ├── store                   &lt;=  Vuex</div><div class="line">│   │   │   ├── views                   &lt;=  视图层</div><div class="line">│   ├── index.ejs                       &lt;= 模板文件</div><div class="line">│   ├── package.json                    &lt;=  相关依赖</div><div class="line">├── build                               &lt;=  打包桌面应用相关</div><div class="line">│   ├── Gruntfile.js                    &lt;=  构建脚本</div><div class="line">│   ├── package.json                    &lt;=  相关依赖</div><div class="line">├── tasks                               &lt;=  electron-packeger打包</div><div class="line">│   ├── release.js</div><div class="line">│   ├── runner.js</div><div class="line">├── <span class="built_in">test</span>                                &lt;=  测试文件夹  </div><div class="line">│   ├── e2e</div><div class="line">│   ├── unit</div><div class="line">│   ├── .eslintrc</div><div class="line">├── config.js                           &lt;=  electron打包配置</div><div class="line">├── webpack.main.config.js</div><div class="line">├── webpack.renderer.config.js</div><div class="line">├── package.js</div><div class="line">│</div><div class="line">│</div></pre></td></tr></table></figure>
+<h2 id="我想写什么"><a href="#我想写什么" class="headerlink" title="我想写什么"></a>我想写什么</h2><p>这个我个人练手的项目还在入门的开发阶段，而在这个分类里面，我想将“独酌雅居”这个应用整个开发的过程都记录下来，这当中我会遇到什么样的坑，又是通过什么样的方法解决的，等等等等。</p>
+<p>项目地址：<a href="https://github.com/banpai/garden" target="_blank" rel="external">https://github.com/banpai/garden</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/独酌雅居/">独酌雅居</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+    
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  <div id="SOHUCS" sid="独酌雅居"></div>
+  <script>
+    (function(){
+      var appid = 'cytelfBxT',
+      conf = 'dce92914baab6d00f81718aa0e7e63ac';
+      var doc = document,
+      s = doc.createElement('script'),
+      h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+      s.type = 'text/javascript';
+      s.charset = 'utf-8';
+      s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+      h.insertBefore(s,h.firstChild);
+      window.SCS_NO_IFRAME = true;
+    })()
+  </script>
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/有间书院/">有间书院</a><small>1</small></li>
+  
+    <li><a href="/categories/独酌雅居/">独酌雅居</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/第一章-女婴/" style="font-size: 10px;">第一章 女婴</a> <a href="/tags/自我介绍/" style="font-size: 10px;">自我介绍</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 半拍
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
