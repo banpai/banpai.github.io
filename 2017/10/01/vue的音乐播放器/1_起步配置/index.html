@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>起步配置 | 半拍的博客</title>
+  <meta name="author" content="半拍版权所有 ICP证：苏ICP备15046714号">
+  
+  <meta name="description" content="学习总结 思考感悟 知识管理">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="起步配置"/>
+  <meta property="og:site_name" content="半拍的博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="半拍的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">半拍的博客</a></h1>
+  <h2><a href="/">凡走过，必留下痕迹，学点什么都会有用的</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-10-01T04:45:53.949Z"><a href="/2017/10/01/vue的音乐播放器/1_起步配置/">2017-10-01</a></time>
+      
+      
+  
+    <h1 class="title">起步配置</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>准备重新开始捋一遍vue的流程，重新做一遍音乐播放器，而这个vue的音乐播放器是我在github上找到一个前端大神写的，想拿来分析研究重新再写一遍！</p>
+<p>在此将一些重要的知识点，全部都记录下来，以便以后自己随时查阅。</p>
+<a id="more"></a>
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a><strong>初始化项目</strong></h2><p>这个项目呢，主要使用的是vue的全家桶，主要就是加了<code>vue-router</code>和<code>vuex</code>了。</p>
+<p>就我个人简单的浅薄理解来说，<code>vue-router</code>是用来实现组件化配置的，<code>vuex</code>就是全局变量的意思。</p>
+<p>先用<code>vue-cli</code>的脚手架来<code>init</code>一个项目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vue init webpack vueMusic</div></pre></td></tr></table></figure>
+<p><img src="/images/vueMusic/1.png" alt=""></p>
+<p>我这里依赖的安装是直接去切的淘宝镜像，之后只要执行<code>npm run dev</code>,监听8080端口，在浏览器里输入<a href="http://127.0.0.1:8080" target="_blank" rel="external">http://127.0.0.1:8080</a>,就能直接看到初始化的项目页面了。</p>
+<h2 id="配置src"><a href="#配置src" class="headerlink" title="配置src"></a><strong>配置src</strong></h2><p>接下来，修改src目录下的文件结构：</p>
+<p><img src="/images/vueMusic/2.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">src                            </div><div class="line">├── api                         &lt;= 主要放调用ajax或者jsonp数据的接口文件</div><div class="line">├── base                        &lt;= 放一些可以复用的公共组件</div><div class="line">├── common                      &lt;= 放css,js和图片的静态文件夹</div><div class="line">├── components                  &lt;= 放各类页面的组件</div><div class="line">├── router                      &lt;= 放路由的配置</div><div class="line">├── store                       &lt;= 放vuex的一些配置</div></pre></td></tr></table></figure>
+<h2 id="CSS预处理器Stylus"><a href="#CSS预处理器Stylus" class="headerlink" title="CSS预处理器Stylus"></a><strong>CSS预处理器Stylus</strong></h2><p>我知道的<code>css</code>预处理器有三种，<code>Less</code>,<code>Sass</code>和<code>Stylus</code>,怎么说呢，各有优劣。</p>
+<p><code>Sass</code>: 可能可编程能力很强。</p>
+<p><code>Less</code>: 兼容css，上手非常的快。</p>
+<p><code>Stylus</code>: 是最后出来的，主要用来为<code>node</code>项目进行css的预处理</p>
+<p>在<code>package.json</code>里的<code>devDependenciesd</code>对象下添加依赖版本，然后再<code>cnpm i</code>安装一下。</p>
+<p><img src="/images/vueMusic/4.png" alt=""></p>
+<p>最后在，用Stylus配置一下整个应用的色系</p>
+<p><img src="/images/vueMusic/5.png" alt=""></p>
+<p>调用方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;style scoped lang=&quot;stylus&quot; rel=&quot;stylesheet/stylus&quot;&gt;</div><div class="line">@import &quot;~common/stylus/variable&quot;</div><div class="line">.m-header</div><div class="line">    color: $color-background</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a><strong>注意事项</strong></h2><ul>
+<li>在webpack.base.conf.js里可以添加修改地址解析的路径，如：</li>
+</ul>
+<p><img src="/images/vueMusic/6.png" alt=""></p>
+<ul>
+<li>在.eslintrc.js里重新添加新的规则禁止掉末尾有空行和function右边多一个space的检查</li>
+</ul>
+<p><img src="/images/vueMusic/7.png" alt=""></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/vue的音乐播放器/">vue的音乐播放器</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+    
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  <div id="SOHUCS" sid="起步配置"></div>
+  <script>
+    (function(){
+      var appid = 'cytelfBxT',
+      conf = 'dce92914baab6d00f81718aa0e7e63ac';
+      var doc = document,
+      s = doc.createElement('script'),
+      h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+      s.type = 'text/javascript';
+      s.charset = 'utf-8';
+      s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+      h.insertBefore(s,h.firstChild);
+      window.SCS_NO_IFRAME = true;
+    })()
+  </script>
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/vue的音乐播放器/">vue的音乐播放器</a><small>1</small></li>
+  
+    <li><a href="/categories/冥想练习/">冥想练习</a><small>1</small></li>
+  
+    <li><a href="/categories/有间书院/">有间书院</a><small>2</small></li>
+  
+    <li><a href="/categories/每日一绘/">每日一绘</a><small>2</small></li>
+  
+    <li><a href="/categories/独酌雅居/">独酌雅居</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/不生二念/" style="font-size: 10px;">不生二念</a> <a href="/tags/自我介绍/" style="font-size: 10px;">自我介绍</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 半拍版权所有 ICP证：苏ICP备15046714号
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
