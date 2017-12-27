@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>vue2.0集成px自动转rem方案 | 半拍的博客</title>
+  <meta name="author" content="半拍版权所有 ICP证：苏ICP备15046714号">
+  
+  <meta name="description" content="学习总结 思考感悟 知识管理">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="vue2.0集成px自动转rem方案"/>
+  <meta property="og:site_name" content="半拍的博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="半拍的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">半拍的博客</a></h1>
+  <h2><a href="/">凡走过，必留下痕迹，学点什么都会有用的</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">首页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/about">关于我</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-27T04:39:11.981Z"><a href="/2017/12/27/acrobatics/px2rem/">2017-12-27</a></time>
+      
+      
+  
+    <h1 class="title">vue2.0集成px自动转rem方案</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>第一步：因为rem是根据更元素来计算大小，所以，捕捉到当前屏幕的大小并赋值给html</p>
+<p>第二步：使用px2rem插件，来捕捉当前项目的所有px，直接计算相对应数值。</p>
+<a id="more"></a>
+<p>1、安装插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cnpm i postcss-px2rem --save-dev</div><div class="line"></div><div class="line">cnpm install px2rem-loader --save-dev</div></pre></td></tr></table></figure>
+<p>2、配置px2rem<br>build目录下vue-loader.conf.js中，做如下修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">loaders: utils.cssLoaders(&#123;</div><div class="line">sourceMap: isProduction</div><div class="line">? config.build.productionSourceMap</div><div class="line">: config.dev.cssSourceMap,</div><div class="line">extract: isProduction</div><div class="line">&#125;),</div><div class="line">transformToRequire: &#123;</div><div class="line">video: &apos;src&apos;,</div><div class="line">source: &apos;src&apos;,</div><div class="line">img: &apos;src&apos;,</div><div class="line">image: &apos;xlink:href&apos;</div><div class="line">&#125;,</div><div class="line">postcss:[require(&apos;postcss-px2rem&apos;)(&#123;&apos;remUnit&apos;:37.5,&apos;baseDpr&apos;:2&#125;)]           /*因为我是以750px(iphone6)宽度为基准，所以remUnit为37.5*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3、在static目录中，建js文件夹，放flex.js:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div></pre></td><td class="code"><pre><div class="line">;(function(win, lib) &#123;</div><div class="line">var doc = win.document;</div><div class="line">var docEl = doc.documentElement;</div><div class="line">var metaEl = doc.querySelector(&apos;meta[name=&quot;viewport&quot;]&apos;);</div><div class="line">var flexibleEl = doc.querySelector(&apos;meta[name=&quot;flexible&quot;]&apos;);</div><div class="line">var dpr = 0;</div><div class="line">var scale = 0;</div><div class="line">var tid;</div><div class="line">var flexible = lib.flexible || (lib.flexible = &#123;&#125;);</div><div class="line"></div><div class="line">if (metaEl) &#123;</div><div class="line">//console.warn(&apos;将根据已有的meta标签来设置缩放比例&apos;);</div><div class="line">var match = metaEl.getAttribute(&apos;content&apos;).match(/initial\-scale=([\d\.]+)/);</div><div class="line">if (match) &#123;</div><div class="line">scale = parseFloat(match[1]);</div><div class="line">dpr = parseInt(1 / scale);</div><div class="line">&#125;</div><div class="line">&#125; else if (flexibleEl) &#123;</div><div class="line">var content = flexibleEl.getAttribute(&apos;content&apos;);</div><div class="line">if (content) &#123;</div><div class="line">var initialDpr = content.match(/initial\-dpr=([\d\.]+)/);</div><div class="line">var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/);</div><div class="line">if (initialDpr) &#123;</div><div class="line">dpr = parseFloat(initialDpr[1]);</div><div class="line">scale = parseFloat((1 / dpr).toFixed(2));</div><div class="line">&#125;</div><div class="line">if (maximumDpr) &#123;</div><div class="line">dpr = parseFloat(maximumDpr[1]);</div><div class="line">scale = parseFloat((1 / dpr).toFixed(2));</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if (!dpr &amp;&amp; !scale) &#123;</div><div class="line">var isAndroid = win.navigator.appVersion.match(/android/gi);</div><div class="line">var isIPhone = win.navigator.appVersion.match(/iphone/gi);</div><div class="line">var devicePixelRatio = win.devicePixelRatio;</div><div class="line">if (isIPhone) &#123;</div><div class="line">// iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案</div><div class="line">if (devicePixelRatio &gt;= 3 &amp;&amp; (!dpr || dpr &gt;= 3)) &#123;</div><div class="line">dpr = 3;</div><div class="line">&#125; else if (devicePixelRatio &gt;= 2 &amp;&amp; (!dpr || dpr &gt;= 2))&#123;</div><div class="line">dpr = 2;</div><div class="line">&#125; else &#123;</div><div class="line">dpr = 1;</div><div class="line">&#125;</div><div class="line">&#125; else &#123;</div><div class="line">// 其他设备下，仍旧使用1倍的方案</div><div class="line">dpr = 1;</div><div class="line">&#125;</div><div class="line">scale = 1 / dpr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">docEl.setAttribute(&apos;data-dpr&apos;, dpr);</div><div class="line">if (!metaEl) &#123;</div><div class="line">metaEl = doc.createElement(&apos;meta&apos;);</div><div class="line">metaEl.setAttribute(&apos;name&apos;, &apos;viewport&apos;);</div><div class="line">metaEl.setAttribute(&apos;content&apos;, &apos;initial-scale=&apos; + scale + &apos;, maximum-scale=&apos; + scale + &apos;, minimum-scale=&apos; + scale + &apos;, user-scalable=no&apos;);</div><div class="line">if (docEl.firstElementChild) &#123;</div><div class="line">docEl.firstElementChild.appendChild(metaEl);</div><div class="line">&#125; else &#123;</div><div class="line">var wrap = doc.createElement(&apos;div&apos;);</div><div class="line">wrap.appendChild(metaEl);</div><div class="line">doc.write(wrap.innerHTML);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function refreshRem()&#123;</div><div class="line">var width = docEl.getBoundingClientRect().width;</div><div class="line">if (width / dpr &gt; 540) &#123;</div><div class="line">width = 540 * dpr;</div><div class="line">&#125;</div><div class="line">var rem = width / 10;</div><div class="line">docEl.style.fontSize = rem + &apos;px&apos;;</div><div class="line">flexible.rem = win.rem = rem;</div><div class="line">&#125;</div><div class="line"></div><div class="line">win.addEventListener(&apos;resize&apos;, function() &#123;</div><div class="line">clearTimeout(tid);</div><div class="line">tid = setTimeout(refreshRem, 300);</div><div class="line">&#125;, false);</div><div class="line">win.addEventListener(&apos;pageshow&apos;, function(e) &#123;</div><div class="line">if (e.persisted) &#123;</div><div class="line">clearTimeout(tid);</div><div class="line">tid = setTimeout(refreshRem, 300);</div><div class="line">&#125;</div><div class="line">&#125;, false);</div><div class="line"></div><div class="line">if (doc.readyState === &apos;complete&apos;) &#123;</div><div class="line">doc.body.style.fontSize = 12 * dpr + &apos;px&apos;;</div><div class="line">&#125; else &#123;</div><div class="line">doc.addEventListener(&apos;DOMContentLoaded&apos;, function(e) &#123;</div><div class="line">doc.body.style.fontSize = 12 * dpr + &apos;px&apos;;</div><div class="line">&#125;, false);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">refreshRem();</div><div class="line"></div><div class="line">flexible.dpr = win.dpr = dpr;</div><div class="line">flexible.refreshRem = refreshRem;</div><div class="line">flexible.rem2px = function(d) &#123;</div><div class="line">var val = parseFloat(d) * this.rem;</div><div class="line">if (typeof d === &apos;string&apos; &amp;&amp; d.match(/rem$/)) &#123;</div><div class="line">val += &apos;px&apos;;</div><div class="line">&#125;</div><div class="line">return val;</div><div class="line">&#125;</div><div class="line">flexible.px2rem = function(d) &#123;</div><div class="line">var val = parseFloat(d) / this.rem;</div><div class="line">if (typeof d === &apos;string&apos; &amp;&amp; d.match(/px$/)) &#123;</div><div class="line">val += &apos;rem&apos;;</div><div class="line">&#125;</div><div class="line">return val;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;)(window, window[&apos;lib&apos;] || (window[&apos;lib&apos;] = &#123;&#125;));</div></pre></td></tr></table></figure>
+<p>4、在index.html中，加入flex.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;static/js/flex.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/小知识/">小知识</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+    
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  <div id="SOHUCS" sid="vue2.0集成px自动转rem方案"></div>
+  <script>
+    (function(){
+      var appid = 'cytelfBxT',
+      conf = 'dce92914baab6d00f81718aa0e7e63ac';
+      var doc = document,
+      s = doc.createElement('script'),
+      h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+      s.type = 'text/javascript';
+      s.charset = 'utf-8';
+      s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+      h.insertBefore(s,h.firstChild);
+      window.SCS_NO_IFRAME = true;
+    })()
+  </script>
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/从零开始学爬虫/">从零开始学爬虫</a><small>1</small></li>
+  
+    <li><a href="/categories/学画画/">学画画</a><small>3</small></li>
+  
+    <li><a href="/categories/小知识/">小知识</a><small>1</small></li>
+  
+    <li><a href="/categories/灵力世界/">灵力世界</a><small>2</small></li>
+  
+    <li><a href="/categories/随笔集/">随笔集</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 半拍版权所有 ICP证：苏ICP备15046714号
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
