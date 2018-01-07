@@ -53,7 +53,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-12-25T13:44:48.754Z"><a href="/2017/12/25/python/1/">2017-12-25</a></time>
+        <time datetime="2018-01-07T12:17:40.892Z"><a href="/2018/01/07/python/1/">2018-01-07</a></time>
       
       
   
@@ -73,6 +73,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">virtualenv -p C:\Users\Administrator\AppData\Local\Programs\Python\Python35\python.exe scrapypy3</div><div class="line">cd scrapypy3</div><div class="line">cd Scripts</div><div class="line">activate.bat</div><div class="line">python</div></pre></td></tr></table></figure>
 <p>安装依赖virtualenv的工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pip install -i https://pypi.douban.com/simple/ virtualenvwrapper</div><div class="line">Collecting virtualenvwrapper</div></pre></td></tr></table></figure></p>
 <p>安装 scrapy<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(scrapytest) E:\program\python\scrapytest\Scripts&gt;pip install -i https://pypi.douban.com/simple scrapy</div></pre></td></tr></table></figure></p>
+<p>安装 virtualenvwrapper<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install -i https://pypi.douban.com/simple/ virtualenvwrapper-win</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>修改工作环境，配置环境变量：<br>WORKON_HOME<br>E:\program\virtualevn</p>
+</blockquote>
+<p>新建article项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkvirtualenv --python=C:\Users\Administrator\AppData\Local\Programs\Python\Python35\python.exe article</div></pre></td></tr></table></figure>
+<p>创建项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">C:\Users\Administrator&gt;workon</div><div class="line"></div><div class="line">Pass a name to activate one of the following virtualenvs:</div><div class="line">==============================================================================</div><div class="line">article</div><div class="line"></div><div class="line">C:\Users\Administrator&gt;workon article</div><div class="line">(article) C:\Users\Administrator&gt;   </div><div class="line"></div><div class="line">C:\Users\Administrator&gt;workon article</div><div class="line">(article) C:\Users\Administrator&gt;cd /d E:\program\python</div><div class="line"></div><div class="line">(article) E:\program\python&gt;scrapy startproject ArticleSpider</div><div class="line"></div><div class="line">(article) E:\program\python\ArticleSpider&gt;scrapy genspider jobble blog.jobbole.com</div><div class="line">Created spider &apos;jobble&apos; using template &apos;basic&apos; in module:</div><div class="line">  ArticleSpider.spiders.jobble</div></pre></td></tr></table></figure></p>
+<p>xpath<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">scrapy shell http://blog.jobbole.com/113429/</div><div class="line">&gt;&gt;&gt; title = response.xpath(&apos;//*[@id=&quot;post-113429&quot;]/div[1]/h1/text()&apos;)</div><div class="line">&gt;&gt;&gt; title</div><div class="line">[&lt;Selector xpath=&apos;//*[@id=&quot;post-113429&quot;]/div[1]/h1/text()&apos; data=u&apos;\u6bd4\u7279\u5e01\u5165\u95e8\u6559\u7a0b&apos;&gt;]</div><div class="line">&gt;&gt;&gt; title.extract()[0]</div><div class="line">u&apos;\u6bd4\u7279\u5e01\u5165\u95e8\u6559\u7a0b&apos;</div><div class="line">&gt;&gt;&gt;</div><div class="line"></div><div class="line">&gt;&gt;&gt; response.xpath(&apos;//*[@id=&quot;post-113429&quot;]/div[2]/p/text()&apos;).extract()[0]</div><div class="line">u&apos;\r\n\r\n            2018/01/04 \xb7  &apos;</div><div class="line"></div><div class="line">&gt;&gt;&gt; response.xpath(&apos;//*[@id=&quot;post-113429&quot;]/div[2]/p/text()&apos;).extract()[0].strip().replace(u&apos;\xb7&apos;, u&apos; &apos;).replace(&quot; &quot;, &quot;&quot;).encode(&quot;utf-8&quot;)</div><div class="line">&apos;2018/01/04&apos;</div><div class="line"></div><div class="line">&gt;&gt;&gt; response.xpath(&apos;//*[@id=&quot;post-113429&quot;]/div[2]/p/text()&apos;).extract()[0].strip().replace(&apos; ·&apos;, &apos;&apos;)</div><div class="line">&apos;2018/01/04&apos;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -151,7 +159,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2017 半拍版权所有 ICP证：苏ICP备15046714号
+  &copy; 2018 半拍版权所有 ICP证：苏ICP备15046714号
   
 </div>
 <div class="clearfix"></div></footer>
